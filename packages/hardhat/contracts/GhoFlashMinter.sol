@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {IACLManager} from '@aave/core-v3/contracts/interfaces/IACLManager.sol';
-import {IPoolAddressesProvider} from '@aave/core-v3/contracts/interfaces/IPoolAddressesProvider.sol';
-import {PercentageMath} from '@aave/core-v3/contracts/protocol/libraries/math/PercentageMath.sol';
-import {IERC3156FlashBorrower} from '@openzeppelin/contracts/interfaces/IERC3156FlashBorrower.sol';
-import {IERC3156FlashLender} from '@openzeppelin/contracts/interfaces/IERC3156FlashLender.sol';
-import {IGhoToken} from '../../gho/interfaces/IGhoToken.sol';
+import {IACLManager} from '../node_modules/@aave/core-v3/contracts/interfaces/IACLManager.sol';
+import {IPoolAddressesProvider} from '../node_modules/@aave/core-v3/contracts/interfaces/IPoolAddressesProvider.sol';
+import {PercentageMath} from '../node_modules/@aave/core-v3/contracts/protocol/libraries/math/PercentageMath.sol';
+import {IERC3156FlashBorrower} from '../node_modules/@openzeppelin/contracts/interfaces/IERC3156FlashBorrower.sol';
+import {IERC3156FlashLender} from '../node_modules/@openzeppelin/contracts/interfaces/IERC3156FlashLender.sol';
+import {IGhoToken} from './IGhoToken.sol';
 import {IGhoFacilitator} from './IGhoFacilitator.sol';
 import {IGhoFlashMinter} from './IGhoFlashMinter.sol';
 
@@ -61,7 +61,7 @@ contract GhoFlashMinter is IGhoFlashMinter {
     _updateGhoTreasury(ghoTreasury);
     _updateFee(fee);
     ADDRESSES_PROVIDER = IPoolAddressesProvider(addressesProvider);
-    ACL_MANAGER = IACLManager(IPoolAddressesProvider(addressesProvider).getACLManager());
+    ACL_MANAGER = IACLManager(addressesProvider); //IACLManager(IPoolAddressesProvider(addressesProvider).getACLManager());
   }
 
   /// @inheritdoc IERC3156FlashLender
